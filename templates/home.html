@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+{% load tailwind_filters %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <title>Weather Live</title>
+</head>
+<style>
+    .container{
+    /* margin-top: 5em; */
+    max-width: 500px;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    padding: 5rem 0;
+    border-radius: 1.5em;
+    border: 2px #ebf1f3;
+    
+}
+.bg-dark{background-color: #00DBDE;
+        background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
+}
+.bg-white{
+    background-color: #ebf1f3;
+}
+.shadow{
+    box-shadow: 0px 0px 20px 0px #aaa;
+}
+.form{
+    width: 100%
+}
+.lg{
+    text-align: center;
+    font-size: 5em;
+    margin: 5rem ;
+    font-family: 'Poppins', sans-serif;
+}
+@media only screen and (max-width: 600px){
+    .lg{
+        font-size: 2rem;
+        font-family: 'Poppins', sans-serif;
+    }
+    .container{
+        margin-right: 5rem;
+    }
+    .box{
+        padding: 2rem;
+        margin-top: -6rem;
+    }
+}
+
+</style>
+<body class="bg-dark">
+    <div style="text-align: right; margin: 2rem 2rem; font-size: large;">
+        <a href="https://github.com/arv011" class="ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">My Git</a>
+    </div>
+    <div class="box">
+        <h1 class="lg">Weather live</h1>
+        <div class="container bg-white shadow ">
+            <div style="margin: 2rem;">
+                <form action="" method="post" style="font-family: 'Poppins', sans-serif;">
+                    {{forms|crispy}}
+                    {% csrf_token %}
+                    <input type="submit" value="submit" class="w-50 text-white bg-pink-500 hover:bg-pink-600 px-3 py-2 rounded-md mt-2">
+                </form>
+                
+            </div>
+            
+            <div style="margin: 2rem;" >
+                {%if sig %}
+                    {%if weather.country %}
+                    <ul style="font-family: 'Poppins', sans-serif; ">
+                        <li>country: {{weather.country}}</li>
+                        <li>City: {{weather.Name}}</li>
+                        <li>Description: {{weather.dec}}</li>
+                        <li>Temperature: {{weather.temp}} °C</li>
+                        <li>Humidity: {{weather.humidity}}%</li>
+                    </ul>
+                    {%else%}
+                        {{weather}}
+                    {% endif %}
+                    {%else%}
+                        <p>Please Insert city or pincode</p>
+                {% endif %}</div>
+            </div>
+    </div>
+</body>
+</html>

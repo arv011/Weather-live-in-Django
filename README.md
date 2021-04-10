@@ -1,3 +1,3 @@
 # Weather-live-in-Django
 
-see live : weather-live-arv.herokuapp.com
+see live : https://weather-live-arv.herokuapp.com/
